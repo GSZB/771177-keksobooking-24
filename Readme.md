@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг»
 
 * Студент: [Szabolcs Gönczy](https://up.htmlacademy.ru/javascript/24/user/771177).
-* Наставник: `Неизвестно`.
+* Наставник: [Ал Геас](https://htmlacademy.ru/profile/id247015).
 
 ---
 
