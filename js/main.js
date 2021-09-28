@@ -2,7 +2,7 @@
 
 function getRandomInt(min, max) {
   if (min >= max) {
-    return 'Минимальное значение не может превышать максимальное';
+    throw new ReferenceError('Минимальное значение не может превышать максимальное');
   }
 
   return Math.floor(Math.random() * max);
@@ -14,7 +14,7 @@ getRandomInt(0, 100);
 
 function getRandomDecimal(min, max, decimal) {
   if (min >= max) {
-    return 'Минимальное значение не может превышать максимальное';
+    throw new ReferenceError('Минимальное значение не может превышать максимальное');
   }
 
   return (Math.random() * max).toFixed(decimal);
