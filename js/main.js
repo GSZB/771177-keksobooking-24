@@ -15,14 +15,16 @@ const MAX_LATTITUDE = 35.70000;
 const MIN_LONGITUDE = 139.70000;
 const MAX_LONGITUDE = 139.80000;
 const DECIMAL_LENGTH = 5;
-const SIMILAR_ADD_COUNT = 10;
+const SIMILAR_AD_COUNT = 10;
 const PHOTOS_OF_PLACES = ['https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/duonguyen-8LrGtIxxa4w.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/brandon-hoogenboom-SNxQGWxZQi0.jpg', 'https://assets.htmlacademy.ru/content/intensive/javascript-1/keksobooking/claire-rendall-b6kAwr1i0Iw.jpg'];
+const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in turpis eget lacus auctor suscipit in id nisi. Nunc aliquet finibus nisi eu vehicula. Quisque a lobortis mi. Nulla eu ultrices leo, non gravida justo. Maecenas vel nisi est. Donec placerat pulvinar risus nec finibus. Integer facilisis sagittis orci id vestibulum. Integer tincidunt risus et tellus malesuada, et placerat neque venenatis. In hac habitasse platea dictumst. Cras quis vestibulum lorem.';
 
 // Функция, возвращающая случайное целое число из переданного диапазона включительно
 
 function getRandomInt(min, max) {
   if (min >= max) {
-    return 'Минимальное значение не может превышать максимальное';
+
+    throw new ReferenceError('Минимальное значение не может превышать максимальное');
   }
 
   return Math.floor(min + Math.random() * (max - min));
@@ -32,7 +34,8 @@ function getRandomInt(min, max) {
 
 function getRandomDecimal(min, max, decimal) {
   if (min >= max) {
-    return 'Минимальное значение не может превышать максимальное';
+
+    throw new ReferenceError('Минимальное значение не может превышать максимальное');
   }
 
   return (min + Math.random() * (max - min)).toFixed(decimal);
@@ -46,11 +49,11 @@ function getRandomArrayElement(elements) {
 
 //location, объект — местоположение в виде географических координат
 
-const coordinates = (min, max, decimal) => getRandomDecimal(min, max, decimal);
+const getCoordinates = (min, max, decimal) => getRandomDecimal(min, max, decimal);
 
 const locationCoordinates = {
-  lat: coordinates(MIN_LATTITUDE, MAX_LATTITUDE, DECIMAL_LENGTH),
-  lng: coordinates(MIN_LONGITUDE, MAX_LONGITUDE, DECIMAL_LENGTH),
+  lat: getCoordinates(MIN_LATTITUDE, MAX_LATTITUDE, DECIMAL_LENGTH),
+  lng: getCoordinates(MIN_LONGITUDE, MAX_LONGITUDE, DECIMAL_LENGTH),
 };
 
 //author, объект — описывает автора
@@ -59,68 +62,69 @@ const author = () => ({ avatar: `img/avatars/user${  getRandomArrayElement(NUMBE
 
 //title, строка — заголовок предложения
 
-const titleOfTheOffer = () => ({ title: getRandomArrayElement(PLACES_OF_HOTELS)});
+const titleOfTheOffer = () => (getRandomArrayElement(PLACES_OF_HOTELS));
 
 //address, строка — адрес предложения
 
-const addressOfHotels = () => ({ address: [locationCoordinates.lat, locationCoordinates.lng]});
+const addressOfHotels = () => ({lat: locationCoordinates.lat, lng: locationCoordinates.lng});
 
 //price, число — стоимость
 
-const priceOfTheOffer = (min, max) => ({price: getRandomInt(min, max)});
+const priceOfTheOffer = (min, max) => (getRandomInt(min, max));
 
 //type, строка — одно из пяти фиксированных значений
 
-const typeOfTheOffer = () => ({ type: getRandomArrayElement(TYPE_OF_PLACES)});
+const typeOfTheOffer = () => getRandomArrayElement(TYPE_OF_PLACES);
 
 //rooms, число — количество комнат
 
-const numberOfRooms = (min, max) => ({rooms: getRandomInt(min, max)});
+const numberOfRooms = (min, max) => (getRandomInt(min, max));
 
 //guests, число — количество гостей
 
-const numberOfGuests = (min, max) => ({guests: getRandomInt(min, max)});
+const numberOfGuests = (min, max) => (getRandomInt(min, max));
 
 //checkin,  строка — одно из трёх фиксированных значений
 
-const checkinTime = () => ({ checkin: getRandomArrayElement(CHECKIN_TIMES)});
+const checkinTime = () => (getRandomArrayElement(CHECKIN_TIMES));
 
 //checkout,  строка — одно из трёх фиксированных значений
 
-const checkoutTime = () => ({ checkout: getRandomArrayElement(CHECKOUT_TIMES)});
+const checkoutTime = () => (getRandomArrayElement(CHECKOUT_TIMES));
 
 //features, строка — массив случайной длины из пяти фиксированных значений
 
-const featuresOfThePlace = () => Array.from({length: Math.floor(Math.random() * FEATURES_OF_PLACES.length)}, () => getRandomArrayElement(FEATURES_OF_PLACES));
+const featuresOfThePlace = () => [...new Set(Array.from({length: Math.floor(Math.random() * (FEATURES_OF_PLACES.length + 1))}, () => getRandomArrayElement(FEATURES_OF_PLACES)))];
 
 //description, строка — строка — описание помещения
 
-const descriptionOfThePlace = () => ({ description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris in turpis eget lacus auctor suscipit in id nisi. Nunc aliquet finibus nisi eu vehicula. Quisque a lobortis mi. Nulla eu ultrices leo, non gravida justo. Maecenas vel nisi est. Donec placerat pulvinar risus nec finibus. Integer facilisis sagittis orci id vestibulum. Integer tincidunt risus et tellus malesuada, et placerat neque venenatis. In hac habitasse platea dictumst. Cras quis vestibulum lorem.'});
+const descriptionOfThePlace = () => DESCRIPTION;
 
 //photos, строка — массив случайной длины из трех фиксированных значений
 
-const photosOfThePlaces = () => Array.from({length: Math.floor(Math.random() * PHOTOS_OF_PLACES.length)}, () => getRandomArrayElement(PHOTOS_OF_PLACES));
+const photosOfThePlaces = () => [...new Set(Array.from({length: Math.floor(Math.random() * (PHOTOS_OF_PLACES.length + 1))}, () => getRandomArrayElement(PHOTOS_OF_PLACES)))];
 
-const createOffer = () => ([
-  titleOfTheOffer(),
-  addressOfHotels(),
-  priceOfTheOffer(MIN_PRICE, MAX_PRICE),
-  typeOfTheOffer(),
-  numberOfRooms(MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS),
-  numberOfGuests(MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS),
-  checkinTime(),
-  checkoutTime(),
-  [...new Set(featuresOfThePlace())],
-  descriptionOfThePlace(),
-  [...new Set(photosOfThePlaces())],
-]);
 
-const createAdd = () => ([
-  author(),
-  createOffer(),
-  locationCoordinates,
-]);
+const createOffer = () => ({
+  title: titleOfTheOffer(),
+  address: addressOfHotels(),
+  price: priceOfTheOffer(MIN_PRICE, MAX_PRICE),
+  type: typeOfTheOffer(),
+  rooms: numberOfRooms(MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS),
+  guests: numberOfGuests(MIN_NUMBER_OF_GUESTS, MAX_NUMBER_OF_GUESTS),
+  checkin: checkinTime(),
+  checkout: checkoutTime(),
+  features: featuresOfThePlace(),
+  description: descriptionOfThePlace(),
+  photos: photosOfThePlaces(),
+});
 
-const similarAdds = () => new Array(SIMILAR_ADD_COUNT).fill(null).map(() => createAdd());
+const createAd = () => ({
+  author: author(),
+  offer: createOffer(),
+  location: locationCoordinates,
+});
 
-similarAdds();
+const similarAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
+
+similarAds();
