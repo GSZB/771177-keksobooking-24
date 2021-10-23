@@ -4,7 +4,8 @@ const NUMBERS_OF_IMAGES = ['01', '02', '03', '04', '05', '06', '07', '08', '09',
 const PLACES_OF_HOTELS = ['Grand Budapest Hotel', 'Balaton Hotel', 'Lupa Beach Hotel', 'Szabolcs Hotel', 'Siofok Hotel', 'Margaret Hostel', 'Hotel Panorama', 'Hotel Tihany', 'Badacsony Apartments', 'Tapolca Hotel'];
 const MIN_PRICE = 10;
 const MAX_PRICE = 1000;
-const TYPE_OF_PLACES = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+const OFFER_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
+// const OFFER_TYPE_TEXT = ['Дворец', 'Квартира', 'Дом', 'Бунгало', 'Отель'];
 const MIN_NUMBER_OF_ROOMS = 1;
 const MAX_NUMBER_OF_ROOMS = 5;
 const MIN_NUMBER_OF_GUESTS = 1;
@@ -49,7 +50,7 @@ const priceOfTheOffer = (min, max) => (getRandomInt(min, max));
 
 //type, строка — одно из пяти фиксированных значений
 
-const typeOfTheOffer = () => getRandomArrayElement(TYPE_OF_PLACES);
+const typeOfTheOffer = () => getRandomArrayElement(OFFER_TYPE);
 
 //rooms, число — количество комнат
 
@@ -100,6 +101,8 @@ const createAd = () => ({
   location: locationCoordinates,
 });
 
-const similarAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
+const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
 
-export {similarAds};
+// console.log(createAd().offer.address.lat, createAd().offer.address.lng);
+
+export {createAds};
