@@ -5,7 +5,13 @@ const PLACES_OF_HOTELS = ['Grand Budapest Hotel', 'Balaton Hotel', 'Lupa Beach H
 const MIN_PRICE = 10;
 const MAX_PRICE = 1000;
 const OFFER_TYPE = ['palace', 'flat', 'house', 'bungalow', 'hotel'];
-// const OFFER_TYPE_TEXT = ['Дворец', 'Квартира', 'Дом', 'Бунгало', 'Отель'];
+const OFFER_TYPE_TEXT = {
+  palace: 'Дворец',
+  flat: 'Квартира',
+  house: 'Дом',
+  bungalow: 'Бунгало',
+  hotel: 'Отель',
+};
 const MIN_NUMBER_OF_ROOMS = 1;
 const MAX_NUMBER_OF_ROOMS = 5;
 const MIN_NUMBER_OF_GUESTS = 1;
@@ -103,6 +109,4 @@ const createAd = () => ({
 
 const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
 
-// console.log(createAd().offer.address.lat, createAd().offer.address.lng);
-
-export {createAds};
+export {OFFER_TYPE_TEXT, createAds};
