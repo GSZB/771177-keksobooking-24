@@ -6,7 +6,7 @@ const templateFragment = document.querySelector('#card').content.querySelector('
 const returnNecessaryFeatures = function (feautresContainer, necessaryFeautersArray) {
   const featuresElements = feautresContainer.querySelectorAll('.popup__feature');
 
-  featuresElements.forEach(featureElement => {
+  featuresElements.forEach((featureElement) => {
     const isNecessary = necessaryFeautersArray.some(
       (necessaryFeature) => featureElement.classList.contains(`popup__feature--${necessaryFeature}`),
     );
@@ -34,7 +34,7 @@ const renderPhotos = function (photosContainer, photosArray) {
   photosContainer.innerHTML = `
     ${photosArray.map((src) => `<img src="${src}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('')}
   `;
-}
+};
 
 const similarAds = createAds();
 
@@ -53,6 +53,5 @@ similarAds.forEach((ad) => {
   adElement.querySelector('.popup__description').textContent = ad.offer.description;
   renderPhotos(adElement.querySelector('.popup__photos'), ad.offer.photos);
   adElement.querySelector('.popup__avatar').src = ad.author.avatar;
-  console.log(adElement.textContent);
   adField.appendChild(adElement);
 });
