@@ -17,28 +17,25 @@ const returnNecessaryFeatures = function (feautresContainer, necessaryFeautersAr
   });
 };
 
-//Ниже я оставил два варианта решения задачи, не знал какой будет лучше, эстетичнее :)
-
 const renderPhotos = function (photosContainer, photosArray) {
-  // photosContainer.innerHTML = '';
-  // photosArray.forEach((src) => {
-  // const image = document.createElement('img');
-  // image.width = 45;
-  // image.height = 40;
-  // image.alt = 'Фотография жилья';
-  // image.className = 'popup__photo';
-  // image.src = src;
-  // photosContainer.appendChild(image);
-  // });
+  photosContainer.innerHTML = '';
+  const photosFragment = document.createDocumentFragment();
 
-  photosContainer.innerHTML = `
-    ${photosArray.map((src) => `<img src="${src}" class="popup__photo" width="45" height="40" alt="Фотография жилья">`).join('')}
-  `;
+  photosArray.forEach((src) => {
+    const image = document.createElement('img');
+    image.width = 45;
+    image.height = 40;
+    image.alt = 'Фотография жилья';
+    image.className = 'popup__photo';
+    image.src = src;
+    photosFragment.appendChild(image);
+  });
+
+  photosContainer.appendChild(photosFragment);
+
 };
 
 const similarAds = createAds();
-
-// const similarAdsFragment = document.createDocumentFragment();
 
 similarAds.forEach((ad) => {
   const adElement = templateFragment.cloneNode(true);
