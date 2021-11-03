@@ -12,6 +12,14 @@ const OFFER_TYPE_TEXT = {
   bungalow: 'Бунгало',
   hotel: 'Отель',
 };
+const TYPE_PRICE = {
+  bungalow: 0,
+  flat: 1000,
+  hotel: 3000,
+  house: 5000,
+  palace: 10000,
+};
+
 const MIN_NUMBER_OF_ROOMS = 1;
 const MAX_NUMBER_OF_ROOMS = 5;
 const MIN_NUMBER_OF_GUESTS = 1;
@@ -109,4 +117,4 @@ const createAd = () => ({
 
 const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
 
-export {OFFER_TYPE_TEXT, createAds};
+export {OFFER_TYPE_TEXT, TYPE_PRICE, createAds};
