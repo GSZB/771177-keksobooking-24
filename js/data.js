@@ -19,7 +19,12 @@ const TYPE_PRICE = {
   house: 5000,
   palace: 10000,
 };
-
+const guestOptionsByRoomNumber = {
+  1: ['для 1 гостя'],
+  2: ['для 1 гостя', 'для 2 гостей'],
+  3: ['для 1 гостя', 'для 2 гостей', 'для 3 гостей'],
+  100: ['не для гостей'],
+};
 const MIN_NUMBER_OF_ROOMS = 1;
 const MAX_NUMBER_OF_ROOMS = 5;
 const MIN_NUMBER_OF_GUESTS = 1;
@@ -117,4 +122,4 @@ const createAd = () => ({
 
 const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
 
-export {OFFER_TYPE_TEXT, TYPE_PRICE, createAds};
+export {OFFER_TYPE_TEXT, TYPE_PRICE, guestOptionsByRoomNumber, createAds};
