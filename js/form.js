@@ -1,10 +1,7 @@
 import { TYPE_PRICE, guestOptionsByRoomNumber } from './data.js';
 
-<<<<<<< HEAD
-=======
 // const form = document.querySelector('.ad-form');
 // const formSubmit = document.querySelector('.ad-form__submit');
->>>>>>> d42d9f9e347842708ccd1095c6064a22460281bc
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
 const apartmantTypeList = document.querySelector('#type');
