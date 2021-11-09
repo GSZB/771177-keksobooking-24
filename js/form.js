@@ -1,5 +1,6 @@
 import { TYPE_PRICE, guestOptionsByRoomNumber } from './data.js';
 
+
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
 const apartmantTypeList = document.querySelector('#type');
@@ -22,9 +23,11 @@ titleInput.addEventListener('input', () => {
   const valueLength = titleInput.value.length;
 
   if (valueLength < MIN_TITLE_LENGTH) {
+
     titleInput.setCustomValidity(`Ещё ${ MIN_TITLE_LENGTH - valueLength } симв.`);
   } else if (valueLength > MAX_TITLE_LENGTH) {
     titleInput.setCustomValidity(`Удалите лишние ${ valueLength - MAX_TITLE_LENGTH } симв.`);
+
   } else {
     titleInput.setCustomValidity('');
   }
@@ -44,9 +47,11 @@ priceInput.addEventListener('invalid', () => {
   if (priceInput.validity.valueMissing) {
     priceInput.setCustomValidity('Обязательное поле');
   } else if (priceInput.validity.rangeUnderflow) {
+
     priceInput.setCustomValidity(`Минимальная цена должна быть ${ priceInput.min } ₽/ночь`);
   } else if (priceInput.validity.rangeOverflow) {
     priceInput.setCustomValidity(`Максимальная цена должна быть ${ priceInput.max } ₽/ночь`);
+
   } else {
     priceInput.setCustomValidity('');
   }
