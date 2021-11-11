@@ -136,4 +136,6 @@ const createAds = () => {
   return arr;
 };
 
+
 export {TOKYO_COORDINATES, OFFER_TYPE_TEXT, TYPE_PRICE, guestOptionsByRoomNumber, createAds};
+
