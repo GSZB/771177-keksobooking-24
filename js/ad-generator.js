@@ -1,6 +1,5 @@
 import { OFFER_TYPE_TEXT, createAds } from './data.js';
 
-const adField = document.querySelector('.map__canvas');
 const templateFragment = document.querySelector('#card').content.querySelector('.popup');
 
 const returnNecessaryFeatures = function (feautresContainer, necessaryFeautersArray) {
