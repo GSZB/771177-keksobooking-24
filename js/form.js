@@ -8,8 +8,13 @@ const roomNumber = document.querySelector('#room_number');
 const guestNumber = document.querySelector('#capacity');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
+
+const coordinateInput = document.querySelector('#address');
 const MIN_TITLE_LENGTH = 30;
 const MAX_TITLE_LENGTH = 100;
+
+coordinateInput.setAttribute('readonly', '');
+
 
 titleInput.addEventListener('invalid', () => {
   if (titleInput.validity.valueMissing) {
@@ -98,4 +103,7 @@ roomNumber.addEventListener('change', () => {
   rerenderGuestSelect(options);
 
 });
+
+export {coordinateInput};
+
 

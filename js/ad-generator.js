@@ -1,6 +1,5 @@
 import { OFFER_TYPE_TEXT, createAds } from './data.js';
 
-const adField = document.querySelector('.map__canvas');
 const templateFragment = document.querySelector('#card').content.querySelector('.popup');
 
 const returnNecessaryFeatures = function (feautresContainer, necessaryFeautersArray) {
@@ -37,11 +36,11 @@ const renderPhotos = function (photosContainer, photosArray) {
 
 const similarAds = createAds();
 
-similarAds.forEach((ad) => {
+const createBalloon = (ad) => {
   const adElement = templateFragment.cloneNode(true);
 
   adElement.querySelector('.popup__title').textContent = ad.offer.title;
-  adElement.querySelector('.popup__text--address').textContent = `${ad.offer.address.lat  } ${  ad.offer.address.lng}`;
+  adElement.querySelector('.popup__text--address').textContent = `${ad.location.lat  } ${  ad.location.lng}`;
   adElement.querySelector('.popup__text--price').textContent = `${ad.offer.price  } ₽/ночь`;
   adElement.querySelector('.popup__type').textContent = OFFER_TYPE_TEXT[ad.offer.type];
   adElement.querySelector('.popup__text--capacity').textContent = `${ad.offer.rooms  } комнаты для ${  ad.offer.guests  } гостей`;
@@ -50,5 +49,8 @@ similarAds.forEach((ad) => {
   adElement.querySelector('.popup__description').textContent = ad.offer.description;
   renderPhotos(adElement.querySelector('.popup__photos'), ad.offer.photos);
   adElement.querySelector('.popup__avatar').src = ad.author.avatar;
-  adField.appendChild(adElement);
-});
+
+  return adElement;
+};
+
+export {similarAds, createBalloon};

@@ -1,5 +1,9 @@
 import {getRandomInt, getRandomDecimal, getRandomArrayElement} from './utils.js';
 
+const TOKYO_COORDINATES = {
+  lat: 35.65858640915274,
+  lng: 139.74540710449222,
+};
 const NUMBERS_OF_IMAGES = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'];
 const PLACES_OF_HOTELS = ['Grand Budapest Hotel', 'Balaton Hotel', 'Lupa Beach Hotel', 'Szabolcs Hotel', 'Siofok Hotel', 'Margaret Hostel', 'Hotel Panorama', 'Hotel Tihany', 'Badacsony Apartments', 'Tapolca Hotel'];
 const MIN_PRICE = 10;
@@ -46,10 +50,13 @@ const DESCRIPTION = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ma
 
 const getCoordinates = (min, max, decimal) => getRandomDecimal(min, max, decimal);
 
-const locationCoordinates = {
+const getLocationCoordinates = () => ({
   lat: getCoordinates(MIN_LATTITUDE, MAX_LATTITUDE, DECIMAL_LENGTH),
   lng: getCoordinates(MIN_LONGITUDE, MAX_LONGITUDE, DECIMAL_LENGTH),
-};
+});
+
+// const locationCoordinates = getLocationCoordinates();
+
 
 //author, объект — описывает автора
 
@@ -58,10 +65,6 @@ const author = () => ({ avatar: `img/avatars/user${  getRandomArrayElement(NUMBE
 //title, строка — заголовок предложения
 
 const titleOfTheOffer = () => (getRandomArrayElement(PLACES_OF_HOTELS));
-
-//address, строка — адрес предложения
-
-const addressOfHotels = () => ({lat: locationCoordinates.lat, lng: locationCoordinates.lng});
 
 //price, число — стоимость
 
@@ -99,10 +102,9 @@ const descriptionOfThePlace = () => DESCRIPTION;
 
 const photosOfThePlaces = () => [...new Set(Array.from({length: Math.floor(Math.random() * (PHOTOS_OF_PLACES.length + 1))}, () => getRandomArrayElement(PHOTOS_OF_PLACES)))];
 
-
 const createOffer = () => ({
   title: titleOfTheOffer(),
-  address: addressOfHotels(),
+  address: getLocationCoordinates(),
   price: priceOfTheOffer(MIN_PRICE, MAX_PRICE),
   type: typeOfTheOffer(),
   rooms: numberOfRooms(MIN_NUMBER_OF_ROOMS, MAX_NUMBER_OF_ROOMS),
@@ -114,12 +116,26 @@ const createOffer = () => ({
   photos: photosOfThePlaces(),
 });
 
-const createAd = () => ({
-  author: author(),
-  offer: createOffer(),
-  location: locationCoordinates,
-});
+// const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
 
-const createAds = () => new Array(SIMILAR_AD_COUNT).fill(null).map(createAd);
+const createAds = () => {
+  const arr = []; //new Array(SIMILAR_AD_COUNT).fill(null)
 
-export {OFFER_TYPE_TEXT, TYPE_PRICE, guestOptionsByRoomNumber, createAds};
+  for(let i = 0; i <= SIMILAR_AD_COUNT; i++) {
+    const authorObj = author();
+    const offerObj = createOffer();
+    const locationObj = offerObj.address;
+
+    arr.push({
+      author: authorObj,
+      offer: offerObj,
+      location: locationObj,
+    });
+  }
+
+  return arr;
+};
+
+
+export {TOKYO_COORDINATES, OFFER_TYPE_TEXT, TYPE_PRICE, guestOptionsByRoomNumber, createAds};
+
