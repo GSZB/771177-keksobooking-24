@@ -29,6 +29,4 @@ const removeDisableCondition = function () {
   });
 };
 
-// removeDisableCondition();
-
 export {removeDisableCondition};
