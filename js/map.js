@@ -1,7 +1,8 @@
 import {removeDisableCondition} from './form-disabled.js';
 import { TOKYO_COORDINATES } from './data.js';
 import { coordinateInput } from './form.js';
-import { similarAds, createBalloon } from './ad-generator.js';
+import { createBalloon } from './ad-generator.js';
+import { fetchAds } from './api.js';
 
 const tokyoMap = L.map('map-canvas')
   .on('load', () => {
@@ -44,7 +45,7 @@ mainMarker.on('moveend', (evt) => {
   coordinateInput.value = `${markerCoordinates.lat.toFixed(5).toString()  }, ${  markerCoordinates.lng.toFixed(5).toString()}`;
 });
 
-similarAds.forEach((ad) => {
+const bindBalloonToMap = (ad) => {
   const balloonElement = createBalloon(ad);
 
   L.marker({
@@ -54,4 +55,10 @@ similarAds.forEach((ad) => {
     icon: secondaryIcon,
   }).addTo(tokyoMap)
     .bindPopup(balloonElement);
-});
+};
+
+fetchAds()
+  .then((ads) => {
+    ads.forEach((ad) => bindBalloonToMap(ad));
+  });
+
