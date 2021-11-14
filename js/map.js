@@ -1,8 +1,9 @@
 import {removeDisableCondition} from './form-disabled.js';
 import { TOKYO_COORDINATES } from './data.js';
-import { coordinateInput } from './form.js';
 import { createBalloon } from './ad-generator.js';
 import { fetchAds } from './api.js';
+
+const coordinateInput = document.querySelector('#address');
 
 const tokyoMap = L.map('map-canvas')
   .on('load', () => {
@@ -62,3 +63,4 @@ fetchAds()
     ads.forEach((ad) => bindBalloonToMap(ad));
   });
 
+export {tokyoMap, mainMarker};
