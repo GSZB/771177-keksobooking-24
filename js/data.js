@@ -24,6 +24,8 @@ const guestOptionsByRoomNumber = {
   100: ['не для гостей'],
 };
 
+const REQUIRED_BALLOON_AMOUNT = 10;
 
-export {TOKYO_COORDINATES, OFFER_TYPE_TEXT, TYPE_PRICE, guestOptionsByRoomNumber};
+
+export {TOKYO_COORDINATES, OFFER_TYPE_TEXT, TYPE_PRICE, REQUIRED_BALLOON_AMOUNT, guestOptionsByRoomNumber};
 

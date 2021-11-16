@@ -27,5 +27,4 @@ const sendData = (onSuccess, onFail, body) => {
     });
 };
 
-
 export {fetchAds, sendData};

@@ -1,7 +1,7 @@
 const formDisabled = document.querySelector('.ad-form');
 const formDisabledFieldsets = formDisabled.querySelectorAll('fieldset');
-const mapFormDisabled = document.querySelector('.map__filters');
-const mapFormDisabledSelects = mapFormDisabled.querySelectorAll('select');
+const formFilter = document.querySelector('.map__filters');
+const filterSelect = formFilter.querySelectorAll('select');
 
 formDisabled.classList.add('ad-form--disabled');
 
@@ -9,10 +9,10 @@ formDisabledFieldsets.forEach((formDisabledFieldset) => {
   formDisabledFieldset.setAttribute('disabled', '');
 });
 
-mapFormDisabled.classList.add('map__filters--disabled');
+formFilter.classList.add('map__filters--disabled');
 
-mapFormDisabledSelects.forEach((mapFormDisabledSelect) => {
-  mapFormDisabledSelect.setAttribute('disabled', '');
+filterSelect.forEach((formFilterSelect) => {
+  formFilterSelect.setAttribute('disabled', '');
 });
 
 const removeDisableCondition = function () {
@@ -22,11 +22,11 @@ const removeDisableCondition = function () {
     formDisabledFieldset.removeAttribute('disabled');
   });
 
-  mapFormDisabled.classList.remove('map__filters--disabled');
+  formFilter.classList.remove('map__filters--disabled');
 
-  mapFormDisabledSelects.forEach((mapFormDisabledSelect) => {
-    mapFormDisabledSelect.removeAttribute('disabled');
+  filterSelect.forEach((formFilterSelect) => {
+    formFilterSelect.removeAttribute('disabled');
   });
 };
 
-export {removeDisableCondition};
+export {removeDisableCondition, formFilter, filterSelect};
