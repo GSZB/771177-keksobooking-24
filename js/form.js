@@ -1,7 +1,7 @@
-import { TYPE_PRICE, guestOptionsByRoomNumber } from './data.js';
+import { TypePrice, GUEST_OPTION_BY_ROOM_NUMBER } from './data.js';
 import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './util.js';
-import { TOKYO_COORDINATES } from './data.js';
+import { TOKYO_COORDINATES, MIN_TITLE_LENGTH, MAX_TITLE_LENGTH } from './data.js';
 import { tokyoMap, mainMarker } from './map.js';
 import { formFilter } from './form-disabled.js';
 
@@ -17,8 +17,7 @@ const bookingForm = document.querySelector('.ad-form');
 const formSubmitButtom = document.querySelector('.ad-form__submit');
 
 const coordinateInput = document.querySelector('#address');
-const MIN_TITLE_LENGTH = 30;
-const MAX_TITLE_LENGTH = 100;
+
 
 coordinateInput.setAttribute('readonly', '');
 coordinateInput.setAttribute('value', `${TOKYO_COORDINATES.lat.toFixed(5)}, ${TOKYO_COORDINATES.lng.toFixed(5)}`);
@@ -46,8 +45,8 @@ titleInput.addEventListener('input', () => {
 });
 
 const changePriceValue = function () {
-  priceInput.setAttribute('min', TYPE_PRICE[apartmantTypeList.value]);
-  priceInput.placeholder = TYPE_PRICE[apartmantTypeList.value];
+  priceInput.setAttribute('min', TypePrice[apartmantTypeList.value]);
+  priceInput.placeholder = TypePrice[apartmantTypeList.value];
 };
 
 apartmantTypeList.addEventListener('change', () => {
@@ -103,10 +102,10 @@ const rerenderGuestSelect = function (options, key) {
   guestNumber.value = newValue;
 };
 
-rerenderGuestSelect(guestOptionsByRoomNumber, 1);
+rerenderGuestSelect(GUEST_OPTION_BY_ROOM_NUMBER, 1);
 
 roomNumber.addEventListener('change', () => {
-  rerenderGuestSelect(guestOptionsByRoomNumber, roomNumber.value);
+  rerenderGuestSelect(GUEST_OPTION_BY_ROOM_NUMBER, roomNumber.value);
 });
 
 const removePopupLayer = (element) => {
