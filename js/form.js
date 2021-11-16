@@ -3,6 +3,7 @@ import { sendData } from './api.js';
 import { showErrorMessage, showSuccessMessage } from './util.js';
 import { TOKYO_COORDINATES } from './data.js';
 import { tokyoMap, mainMarker } from './map.js';
+import { formFilter } from './form-disabled.js';
 
 
 const titleInput = document.querySelector('#title');
@@ -131,6 +132,7 @@ const removePopupLayer = (element) => {
 bookingForm.addEventListener('reset', () => {
   mainMarker.setLatLng({ lat: TOKYO_COORDINATES.lat.toFixed(5), lng: TOKYO_COORDINATES.lng.toFixed(5) });
   tokyoMap.closePopup();
+  formFilter.reset();
 });
 
 bookingForm.addEventListener('submit', (evt) => {
@@ -142,6 +144,7 @@ bookingForm.addEventListener('submit', (evt) => {
   sendData(
     () => {
       bookingForm.reset();
+      formFilter.reset();
 
       const alertElement = showSuccessMessage();
       document.body.appendChild(removePopupLayer(alertElement));
