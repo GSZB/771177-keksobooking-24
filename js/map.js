@@ -1,7 +1,6 @@
 import {removeDisableCondition} from './form-disabled.js';
 import { TOKYO_COORDINATES } from './data.js';
 import { createBalloon } from './ad-generator.js';
-import { fetchAds } from './api.js';
 
 const coordinateInput = document.querySelector('#address');
 
@@ -33,8 +32,6 @@ const secondaryIcon = L.icon({
   iconAnchor: [20, 40],
 });
 
-L.marker([50.505, 30.57], {icon: myIcon}).addTo(tokyoMap);
-
 const mainMarker = L.marker(
   TOKYO_COORDINATES,   {
     draggable: true,
@@ -46,6 +43,8 @@ mainMarker.on('moveend', (evt) => {
   coordinateInput.value = `${markerCoordinates.lat.toFixed(5).toString()  }, ${  markerCoordinates.lng.toFixed(5).toString()}`;
 });
 
+const markerGroup = L.layerGroup().addTo(tokyoMap);
+
 const bindBalloonToMap = (ad) => {
   const balloonElement = createBalloon(ad);
 
@@ -54,13 +53,8 @@ const bindBalloonToMap = (ad) => {
     lng: ad.location.lng,
   }, {
     icon: secondaryIcon,
-  }).addTo(tokyoMap)
+  }).addTo(markerGroup)
     .bindPopup(balloonElement);
 };
 
-fetchAds()
-  .then((ads) => {
-    ads.forEach((ad) => bindBalloonToMap(ad));
-  });
-
-export {tokyoMap, mainMarker};
+export {tokyoMap, mainMarker, bindBalloonToMap, markerGroup};
