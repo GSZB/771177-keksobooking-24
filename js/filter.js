@@ -1,6 +1,6 @@
 import { formFilter } from './form-disabled.js';
 import { fetchAds } from './api.js';
-import { REQUIRED_BALLOON_AMOUNT } from './data.js';
+import { REQUIRED_BALLOON_AMOUNT, MINIMAL_PRICE_VALUE, MAXIMUM_PRICE_VALUE } from './data.js';
 import { tokyoMap } from './map.js';
 import { bindBalloonToMap } from './map.js';
 import { markerGroup } from './map.js';
@@ -24,19 +24,19 @@ const getRank = (info) => {
 
   switch (priceFilter.value) {
     case 'middle':
-      if (info.offer.price >= 10000 && info.offer.price <= 50000) {
+      if (info.offer.price >= MINIMAL_PRICE_VALUE && info.offer.price <= MAXIMUM_PRICE_VALUE) {
         rank += 2;
       }
 
       break;
     case 'low':
-      if (info.offer.price <= 10000) {
+      if (info.offer.price <= MINIMAL_PRICE_VALUE) {
         rank += 1;
       }
 
       break;
     case 'high':
-      if (info.offer.price >= 50000) {
+      if (info.offer.price >= MAXIMUM_PRICE_VALUE) {
         rank += 3;
       }
 

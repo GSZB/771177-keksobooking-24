@@ -8,13 +8,13 @@ import { formFilter } from './form-disabled.js';
 
 const titleInput = document.querySelector('#title');
 const priceInput = document.querySelector('#price');
-const apartmantTypeList = document.querySelector('#type');
+const apartmentTypeList = document.querySelector('#type');
 const roomNumber = document.querySelector('#room_number');
 const guestNumber = document.querySelector('#capacity');
 const timeIn = document.querySelector('#timein');
 const timeOut = document.querySelector('#timeout');
 const bookingForm = document.querySelector('.ad-form');
-const formSubmitButtom = document.querySelector('.ad-form__submit');
+const formSubmitButton = document.querySelector('.ad-form__submit');
 
 const coordinateInput = document.querySelector('#address');
 
@@ -45,11 +45,11 @@ titleInput.addEventListener('input', () => {
 });
 
 const changePriceValue = function () {
-  priceInput.setAttribute('min', TypePrice[apartmantTypeList.value]);
-  priceInput.placeholder = TypePrice[apartmantTypeList.value];
+  priceInput.setAttribute('min', TypePrice[apartmentTypeList.value]);
+  priceInput.placeholder = TypePrice[apartmentTypeList.value];
 };
 
-apartmantTypeList.addEventListener('change', () => {
+apartmentTypeList.addEventListener('change', () => {
   changePriceValue();
 });
 changePriceValue();
@@ -138,7 +138,7 @@ bookingForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   bookingForm.disabled = true;
-  formSubmitButtom.disabled = true;
+  formSubmitButton.disabled = true;
 
   sendData(
     () => {
@@ -149,14 +149,14 @@ bookingForm.addEventListener('submit', (evt) => {
       document.body.appendChild(removePopupLayer(alertElement));
 
       bookingForm.disabled = false;
-      formSubmitButtom.disabled = false;
+      formSubmitButton.disabled = false;
     },
     () => {
       const alertElement = showErrorMessage();
       document.body.appendChild(removePopupLayer(alertElement));
 
       bookingForm.disabled = false;
-      formSubmitButtom.disabled = false;
+      formSubmitButton.disabled = false;
     },
     new FormData(evt.target),
   );

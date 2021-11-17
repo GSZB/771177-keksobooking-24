@@ -30,14 +30,12 @@ const showAlert = (message) => {
 
 const showSuccessMessage = () => {
   const successFragment = document.querySelector('#success').content.querySelector('.success');
-  const successMessage = successFragment.cloneNode(true);
-  return successMessage;
+  return successFragment.cloneNode(true);
 };
 
 const showErrorMessage = () => {
   const errorFragment = document.querySelector('#error').content.querySelector('.error');
-  const errorMessage = errorFragment.cloneNode(true);
-  return errorMessage;
+  return errorFragment.cloneNode(true);
 };
 
 export {showAlert, showSuccessMessage, showErrorMessage};
