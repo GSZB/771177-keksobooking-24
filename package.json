@@ -7,9 +7,6 @@
     "type": "git",
     "url": "git@github.com:htmlacademy-javascript/771177-keksobooking-24.git"
   },
-  "bugs": {
-    "url": "https://github.com/htmlacademy-javascript/771177-keksobooking-24/issues"
-  },
   "devDependencies": {
     "browser-sync": "2.26.14",
     "eslint": "7.18.0",
